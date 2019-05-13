@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
+    <!-- 将集群的solrClient对象交给Spring管理，可以避免每次使用solr都创建-->
+    <bean id="solrClient" class="org.apache.solr.client.solrj.impl.CloudSolrClient">
+    	<!-- 构造注入虚拟机中的服务地址 -->
+    	<constructor-arg type="java.lang.String" value="192.168.178.133:2181,192.168.178.133:2182,192.168.178.133:2183"></constructor-arg>
+    	<!-- 属性注入solr的索引库 -->
+		<property name="defaultCollection" value="collection1"></property>
+    </bean>
+    
+</beans>

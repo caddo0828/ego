@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 给当前的消费者起名字 -->
+	<dubbo:application name="dubbo-manager"/>
+	<!-- 配置注册中心地址，供给消费者获取服务 -->
+	<dubbo:registry address="192.168.178.132:2181" protocol="zookeeper"></dubbo:registry>
+	<!-- 配置注解扫描dubbo服务的Reference注解，进行服务注入 -->
+	<dubbo:annotation package="com.ssm.manager.service.impl"/>
+	
+</beans>
+

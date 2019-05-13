@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
+  <!-- 扫描注解，dubbo协议中声明事务与spring中的service注解起冲突。因此不扫service注解，扫其他的注解 -->
+  <context:component-scan base-package="com.ssm.dubbo.service.impl"></context:component-scan>
+  
+  <!-- 加载属性配置文件,一个项目中该属性只能使用一次 -->
+  <context:property-placeholder location="classpath*:*.properties"/>
+  
+  <!-- 加载数据源 -->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+  	<property name="driverClassName" value="${jdbc.driver}"></property>
+  	<property name="url" value="${jdbc.url}"></property>
+  	<property name="username" value="${jdbc.username}"></property>
+  	<property name="password" value="${jdbc.password}"></property>
+  </bean>
+  
+  <!-- sqlSessionFactory -->
+  <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  	<!-- factory与数据库连接池交互 -->
+  	<property name="dataSource" ref="dataSource"></property>
+  	<!-- 给哪个包起别名 -->
+  	<property name="typeAliasesPackage" value="com.ssm.pojo"></property>
+  	<!-- 扫描mybatis的配置文件，主要扫描分页插件 -->
+  	<property name="configLocation" value="classpath:mybatis.xml"></property>
+  </bean>
+  
+  <!-- 配置mapper -->
+  <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+  	<!-- 扫描哪个包 -->
+  	<property name="basePackage" value="com.ssm.mapper"></property>
+  	<!-- factory中要与mapper进行交互 -->
+  	<!-- 使用了配置文件时，只能使用 sqlSessionFactoryBeanName 因为自动注入的时候先加载实例对象，还未加载属性文件会无法连接数据库-->
+  	<property name="sqlSessionFactoryBeanName" value="factory"></property>
+  </bean>
+  
+  <!-- 声明事务管理器 -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  	<!-- 事务要提交，要和数据库进行连接 -->
+  	<property name="dataSource" ref="dataSource"></property>
+  </bean>  
+  
+  <!-- 声明式事务 -->
+  <tx:advice id="txAdvice" transaction-manager="txManager">
+  	<tx:attributes>
+  		<!-- 对哪些方法进行事务管理，提供事务回滚机制，和只读机制 -->
+  		<tx:method name="ins*" rollback-for="java.lang.Exception"/>
+  		<tx:method name="upd*" rollback-for="java.lang.Exception"/>
+  		<tx:method name="del*" rollback-for="java.lang.Exception"/>
+  		<!-- 对所有查询的业务设置只读级别 -->
+  		<tx:method name="sel*" read-only="true"/>
+  	</tx:attributes>
+  </tx:advice>
+  
+  <!-- 配置Aop -->
+  <aop:config>
+  	<!-- 给com.ssm.dubbo.service.impl包下的任意类，任意方法，任意参数，创建aop -->
+  	<aop:pointcut expression="execution(* com.ssm.dubbo.service.impl.*.*(..))" id="pointcut"/>
+  	<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+  </aop:config>
+
+</beans>

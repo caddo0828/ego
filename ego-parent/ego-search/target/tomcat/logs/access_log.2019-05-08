@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [08/May/2019:18:47:06 +0800] "GET /search.html?q=javaweb HTTP/1.1" 200 19694 http-bio-8083-exec-1 123209
+0:0:0:0:0:0:0:1 - - [08/May/2019:18:47:07 +0800] "GET /images/20130606B.png HTTP/1.1" 200 3752 http-bio-8083-exec-2 504
+0:0:0:0:0:0:0:1 - - [08/May/2019:18:47:08 +0800] "GET /images/20130415i.png HTTP/1.1" 200 5201 http-bio-8083-exec-3 43
+0:0:0:0:0:0:0:1 - - [08/May/2019:18:47:08 +0800] "GET /images/error-jd.gif HTTP/1.1" 200 15433 http-bio-8083-exec-4 93

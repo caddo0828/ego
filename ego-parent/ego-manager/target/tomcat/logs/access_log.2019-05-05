@@ -1,0 +1,16 @@
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:34 +0800] "GET / HTTP/1.1" 200 2473 http-bio-8080-exec-1 1027
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:53 +0800] "GET /item-add?_=1557056854904 HTTP/1.1" 200 4698 http-bio-8080-exec-3 109
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:53 +0800] "GET /js/kindeditor-4.1.10/kindeditor-all-min.js?_=1557056854905 HTTP/1.1" 200 179915 http-bio-8080-exec-4 14
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:53 +0800] "GET /js/kindeditor-4.1.10/lang/zh_CN.js?_=1557056854906 HTTP/1.1" 200 8488 http-bio-8080-exec-5 5
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:55 +0800] "POST /item/cat/list HTTP/1.1" 200 977 http-bio-8080-exec-6 591
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:56 +0800] "POST /item/cat/list HTTP/1.1" 200 557 http-bio-8080-exec-7 32
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:57 +0800] "POST /item/cat/list HTTP/1.1" 200 196 http-bio-8080-exec-8 25
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:47:58 +0800] "GET /item/param/query/itemcatid/3 HTTP/1.1" 200 327 http-bio-8080-exec-9 40
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:18 +0800] "GET /js/kindeditor-4.1.10/plugins/multiimage/images/swfupload.swf?preventswfcaching=1557056895254 HTTP/1.1" 200 12787 http-bio-8080-exec-1 35
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:26 +0800] "POST /pic/upload?dir=image HTTP/1.1" 200 84 http-bio-8080-exec-3 264
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:51 +0800] "POST /item/cat/list HTTP/1.1" 200 977 http-bio-8080-exec-5 34
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:52 +0800] "POST /item/cat/list HTTP/1.1" 200 557 http-bio-8080-exec-6 25
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:54 +0800] "POST /item/cat/list HTTP/1.1" 200 220 http-bio-8080-exec-6 20
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:56 +0800] "POST /item/cat/list HTTP/1.1" 200 331 http-bio-8080-exec-6 21
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:48:57 +0800] "GET /item/param/query/itemcatid/57 HTTP/1.1" 200 35 http-bio-8080-exec-6 30
+0:0:0:0:0:0:0:1 - - [05/May/2019:19:49:00 +0800] "POST /item/save HTTP/1.1" 200 37 http-bio-8080-exec-6 114

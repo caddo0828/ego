@@ -1,0 +1,69 @@
+﻿ego商城的项目创建总结
+一、项目创建
+1、ego-commons : 放工具类
+2、ego-manager: 后台项目
+3、ego-parent: 父项目
+4、ego-pojo: 实体类
+5、ego-service :  服务接口，提供dubbo服务的地方provider
+6、ego-service-impl ：  dubbo的具体服务实现
+7、ego-redis:   实现数据缓存
+8、ego-search :  实现solr集群的查询项目
+9、ego-portal:  网站门户
+10、ego-item:  商品的具体信息
+11、ego-cart: 购物车界面
+12、ego-order:  订单界面
+13、ego-passport:  用户登录，注册界面  （实现SSO单点登录）
+
+
+二、把所有的资源（css/images/js/jsp）放在 WEB-INF中 
+
+
+四、MyBatis分页插件
+1、在mybatis.xml中配置<plugin>标签，在程序员编写sql代码前或者后做一些事情
+	<configrations>
+		<plugins>
+	                     <plugin interceptors="com.github.pageHelper.PageHelper">
+			<!--告诉插件使用的是什么sql版本，根据版本不同，创建不同的SQL语句-->
+			<properties name="dialect" value="mysql">
+		     </plugin>
+		</plugins>
+	</configrations>
+
+    进行分页插件的处理
+
+五、项目中只能对dubbo的接口进行依赖，不能直接对dubbo的接口实现类进行依赖，否则跟以前的项目没有什么区别，就不是一个RPC项目了
+      dubbo扫描包只能扫描准确路径的包
+
+六、搭建服务
+redis :  192.168.178.134
+solr :    192.168.178.133
+dubbo-nginx-vsftpd : 192.168.178.135
+
+
+七、各项目间端口访问
+ego-manager: 8080
+ego-item : 8081
+ego-portal:    8082
+ego-search:     8083
+ego-passport:  8084
+ego-cart :  8085
+ego-order : 8086
+
+
+八、用户登录验证sso单点登录
+1、用户登录存在两种状态
+	1）：已登录，cookie中有值，并且redis数据中存储了用户登录的信息
+	2）：登录过，但是安全退出了，也就是说token中数据为“”，并且redis键也为空
+	         此时未关闭浏览器： token键依然存在但是值为 "" 
+	         关闭浏览器token不存在
+
+2、因此进行双重校验
+	1）：判断是否存在token。
+	2）：存在token，并且redis中用户信息数据不为空
+	则为单点登录成功
+
+
+九、某些项目不能直接去调用服务，而是通过其他对应的项目去访问服务
+
+十、要求使用远程的HttpClient去访问其他项目的控制器，并获取到对应的响应结果
+ 

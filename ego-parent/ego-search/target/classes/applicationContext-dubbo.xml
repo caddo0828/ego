@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 给当前消费者自定义个名字 -->
+	<dubbo:application name="dubbo-search"/>
+	<!-- 配置注册中心 ，让消费着直接从注册中心获取数据 -->
+	<dubbo:registry address="192.168.178.135:2181" protocol="zookeeper"></dubbo:registry>
+	<!-- 配置注解扫描
+	  因为此处没有与数据库进行交互，所以使用的是注解扫描
+	  扫的是@Reference注解-->
+	<dubbo:annotation package="com.ego.search.service.impl"/>
+	
+</beans>
+

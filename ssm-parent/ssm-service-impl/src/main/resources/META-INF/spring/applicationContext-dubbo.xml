@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- 给当前的应用provide起个名字 -->
+	<dubbo:application name="dubbo-ssm-service"/>
+	<!-- 配置注册中心地址 -->
+	<dubbo:registry address="192.168.178.132:2181" protocol="zookeeper"></dubbo:registry>
+	<!-- 配置dubbo协议 -->
+	<!-- 配置端口 payload="8388608" 表示dubbo中允许传输的最大数据传输量 -->
+	<dubbo:protocol name="dubbo" port="20888" payload="8388608"></dubbo:protocol>
+	<!-- 将其他配置文件放在一起扫描 -->
+	<import resource="../../applicationContext.xml"/>
+
+	<!-- 注册商品服务 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbItemDubboService" ref="tbItemDubboServiceImpl"></dubbo:service>
+	<bean id="tbItemDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbItemDubboServiceImpl"></bean>
+	<!-- 注册商品类目服务 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbItemCatDubboService" ref="tbItemCatDubboServiceImpl"></dubbo:service>
+	<bean id="tbItemCatDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbItemCatDubboServiceImpl"></bean>
+	<!-- 注册商品与商品规格表服务(具体商品规格参数服务) -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbItemParamItemDubboService" ref="tbItemParamItemDubboServiceImpl"></dubbo:service>
+	<bean id="tbItemParamItemDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbItemParamItemDubboServiceImpl"></bean>
+	<!-- 注册商品描述服务 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbItemDescDubboService" ref="tbItemDescDubboServiceImpl"></dubbo:service>
+	<bean id="tbItemDescDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbItemDescDubboServiceImpl"></bean>
+    <!-- 注册类目规格模板 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbItemParamDubboService" ref="tbItemParamDubboServiceImpl"></dubbo:service>
+	<bean id="tbItemParamDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbItemParamDubboServiceImpl"></bean>
+	<!-- 注册内容分类服务 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbContentCategoryDubboService" ref="tbContentCategoryDubboServiceImpl"></dubbo:service>
+	<bean id="tbContentCategoryDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbContentCategoryDubboServiceImpl"></bean>
+	<!-- 注册内容服务 -->
+	<dubbo:service interface="com.ssm.dubbo.service.TbContentDubboService" ref="tbContentDubboServiceImpl"></dubbo:service>
+	<bean id="tbContentDubboServiceImpl" class="com.ssm.dubbo.service.impl.TbContentDubboServiceImpl"></bean>
+	
+</beans>
+
