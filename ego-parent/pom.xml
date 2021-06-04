@@ -25,7 +25,7 @@
 		<ftpclient-version>3.3</ftpclient-version>
 		<druid.version>1.0.9</druid.version>
 		<solrj-version>5.3.1</solrj-version>
-		<httpclient-version>4.4.1</httpclient-version>
+		<httpclient-version>4.5.13</httpclient-version>
 		<redis-version>0.0.1-SNAPSHOT</redis-version>
 	</properties>
 	<dependencyManagement>
